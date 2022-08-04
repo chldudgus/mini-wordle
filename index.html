@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width= , initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+    <h1>📓 TODAY'S WORDLE 📓</h1>
+    <div id="submit">
+        <button>SUBMIT!</button>
+    </div>
+    <div id="main">
+        <input class="input">
+        <input class="input">
+        <input class="input">
+        <input class="input">
+        <input class="input">
+    </div>
+
+    <script>
+        var answer = 'elice';
+        document.querySelector('button').addEventListener('click', function() {
+            var input = document.querySelectorAll(".input");
+            // 1. 위치까지 맞으면 / 초록
+            // 2. 위치는 안 맞으면 / 노랑
+            // 3. 전부 다 아니면 / 회색
+            for (let i=0; i<5; i++) {
+                if (input[i].value == answer[i]) {
+                input[i].style.background = 'lightgreen';
+                } else if (answer.includes(input[i].value)) {
+                    input[i].style.background = 'lightyellow';
+                } else {
+                    input[i].style.background = 'lightgrey';
+                }
+                input[i].classList.remove('input'); // 새로 생긴 input 체크하기 위해 기존 입력란은 제거
+            }
+
+            // 답안 제출 버튼 누른 다음 새로운 시도 추가
+            var template = `<div id="main">
+                <input class="input">
+                <input class="input">
+                <input class="input">
+                <input class="input">
+                <input class="input">
+            </div>`;
+            document.querySelector('body').insertAdjacentHTML('beforeend', template);
+        })
+    </script>
+    
+</body>
+</html>
